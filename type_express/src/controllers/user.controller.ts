@@ -13,16 +13,21 @@ class UserController {
     }
   };
   public createUser = async (req: Request, res: Response, next: NextFunction) => {
-    const users = await getRepository(User).find();
-    const user = new User();
-    user.userId = 'hwang';
-    user.pw = 'asdf1234';
-    user.pwCheck = 'asdf1234';
-    try {
-      user.save();
-      res.json({ msg: 'success' });
-    } catch (e: any) {
-      throw new Error(e);
+    const { userId, nickname, pw, pwCheck, ageGroup } = req.body;
+    if (pw === pwCheck) {
+      try {
+        const user = new User();
+        user.userId = userId;
+        user.nickname = nickname;
+        user.pw = pw;
+        user.ageGroup = ageGroup;
+        user.save();
+        res.json({ success: true });
+      } catch (e: any) {
+        throw new Error(e);
+      }
+    } else {
+      res.json({ success: false });
     }
   };
 }

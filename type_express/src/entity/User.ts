@@ -1,4 +1,5 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Either, Multi } from './Post';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -7,12 +8,33 @@ export class User extends BaseEntity {
 
   @Column({
     length: 20,
+    unique: true,
+    nullable: false,
   })
   userId: string;
+  @Column({
+    unique: true,
+    nullable: false,
+  })
+  nickname: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   pw: string;
 
-  @Column()
-  pwCheck: string;
+  @Column({
+    nullable: false,
+  })
+  ageGroup: number;
+
+  @Column({
+    default: 0,
+  })
+  exp: number;
+
+  @OneToMany((type) => Either, (either) => either.user)
+  either: Either[];
+  @OneToMany((type) => Multi, (multi) => multi.user)
+  multi: Multi[];
 }

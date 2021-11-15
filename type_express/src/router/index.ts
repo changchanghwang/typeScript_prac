@@ -1,11 +1,12 @@
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
-import userCtrl from '../controllers/user.controller';
-
+import userRouter from './user';
+import eitherRouter from './either';
 const router = express.Router();
 
-router.get('/users', userCtrl.getUser);
-router.post('/users', userCtrl.createUser);
+router.use('/users', userRouter);
+router.use('/either', eitherRouter);
+
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.json({ say: 'hello' });
 });

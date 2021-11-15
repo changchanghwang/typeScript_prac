@@ -9,5 +9,6 @@
       "src/entity/*.ts",
       "dist/entity/*.js"
   ],
-  "synchronize": true
+  "synchronize": true,
+  "logging":true
 }
