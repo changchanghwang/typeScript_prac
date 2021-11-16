@@ -1,30 +1,32 @@
 import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
-import { User } from './users';
 
-export interface EitherAttributes {
-  eitherId?: number;
+export interface MultiAttributes {
+  multiId?: number;
   title: string;
   contentA: string;
   contentB: string;
+  contentC?: string;
+  contentD?: string;
+  contentE?: string;
   date: string;
   completed?: boolean;
   edited?: boolean;
   editedDate?: string;
   likeCnt?: number;
-  users?: number;
+  user: number;
 }
-export interface EitherModel extends Model<EitherAttributes>, EitherAttributes {}
-export class Either extends Model<EitherModel, EitherAttributes> {}
+export interface MultiModel extends Model<MultiAttributes>, MultiAttributes {}
+export class Multi extends Model<MultiModel, MultiAttributes> {}
 
-export type EitherStatic = typeof Model & {
-  new (values?: object, options?: BuildOptions): EitherModel;
+export type MultiStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): MultiModel;
 };
 
-export function EitherFactory(sequelize: Sequelize): EitherStatic {
-  return <EitherStatic>sequelize.define(
-    'either',
+export function MultiFactory(sequelize: Sequelize): MultiStatic {
+  return <MultiStatic>sequelize.define(
+    'multi',
     {
-      eitherId: {
+      multiId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -41,6 +43,18 @@ export function EitherFactory(sequelize: Sequelize): EitherStatic {
       contentB: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      contentC: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      contentD: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      contentE: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       date: {
         type: DataTypes.STRING,
@@ -63,12 +77,20 @@ export function EitherFactory(sequelize: Sequelize): EitherStatic {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+      user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+      },
     },
     {
       timestamps: false,
       underscored: false,
-      modelName: 'Either',
-      tableName: 'either',
+      modelName: 'Multi',
+      tableName: 'multi',
       paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',

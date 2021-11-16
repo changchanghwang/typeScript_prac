@@ -143,14 +143,15 @@
 // };
 
 import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
+import { Either } from './eihter';
 
 export interface UserAttributes {
-  id: number;
+  id?: number;
   userId: string;
   nickname: string;
   pw: string;
   ageGroup: number;
-  exp: number;
+  exp?: number;
 }
 export interface UserModel extends Model<UserAttributes>, UserAttributes {}
 export class User extends Model<UserModel, UserAttributes> {}

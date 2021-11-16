@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
-import userCtrl from '../controller/user.controller';
+import eitherCtrl from '../controller/either.controller';
 const router = express.Router();
 
-router.get('/', userCtrl.getUser);
-router.post('/', userCtrl.createUser);
+router.get('/', eitherCtrl.getEither);
+router.post('/', eitherCtrl.createEither);
 
 export default router;

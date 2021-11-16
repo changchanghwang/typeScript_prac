@@ -21,6 +21,7 @@ import * as sequelize from 'sequelize';
 import { UserFactory } from './users';
 import { EitherFactory } from './eihter';
 import { config } from '../config/config';
+import { MultiFactory } from './multi';
 
 export const db = new sequelize.Sequelize(
   config.development.database,
@@ -37,21 +38,25 @@ export const db = new sequelize.Sequelize(
 // sequelize instance as parameter give them `db`
 
 export const User = UserFactory(db);
+export const Multi = MultiFactory(db);
 export const Either = EitherFactory(db);
 
 // Users have either then lets create that relationship
 
 User.hasMany(Either, {
-  foreignKey: 'user',
+  foreignKey: 'users',
   sourceKey: 'id',
   onDelete: 'CASCADE',
 });
-
-// or instead of that, maybe many users have many either
-// Either.belongsTo(User, {
+// User.hasMany(Multi, {
 //   foreignKey: 'user',
-//   targetKey: 'id',
+//   sourceKey: 'id',
 //   onDelete: 'CASCADE',
 // });
 
-// the skill is the limit!
+// or instead of that, maybe many users have many either
+Either.belongsTo(User, {
+  foreignKey: 'users',
+  targetKey: 'id',
+  onDelete: 'CASCADE',
+});
