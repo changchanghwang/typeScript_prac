@@ -11,7 +11,7 @@ export interface EitherAttributes {
   edited?: boolean;
   editedDate?: string;
   likeCnt?: number;
-  users?: number;
+  user?: number;
 }
 export interface EitherModel extends Model<EitherAttributes>, EitherAttributes {}
 export class Either extends Model<EitherModel, EitherAttributes> {}

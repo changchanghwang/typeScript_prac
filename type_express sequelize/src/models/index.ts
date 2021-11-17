@@ -44,7 +44,7 @@ export const Either = EitherFactory(db);
 // Users have either then lets create that relationship
 
 User.hasMany(Either, {
-  foreignKey: 'users',
+  foreignKey: 'user',
   sourceKey: 'id',
   onDelete: 'CASCADE',
 });
@@ -56,7 +56,8 @@ User.hasMany(Either, {
 
 // or instead of that, maybe many users have many either
 Either.belongsTo(User, {
-  foreignKey: 'users',
+  foreignKey: 'user',
+  as: 'users',
   targetKey: 'id',
   onDelete: 'CASCADE',
 });
