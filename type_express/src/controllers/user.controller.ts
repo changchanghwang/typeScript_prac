@@ -12,7 +12,12 @@ class UserController {
       throw new Error(e);
     }
   };
-  public createUser = async (req: Request, res: Response, next: NextFunction) => {
+
+  public createUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const { userId, nickname, pw, pwCheck, ageGroup } = req.body;
     if (pw === pwCheck) {
       try {

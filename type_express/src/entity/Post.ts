@@ -19,6 +19,7 @@ export class Either extends BaseEntity {
     nullable: false,
   })
   title: string;
+
   @Column({
     length: 50,
     nullable: false,

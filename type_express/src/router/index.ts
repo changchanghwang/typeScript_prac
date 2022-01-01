@@ -2,6 +2,7 @@ import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import userRouter from './user';
 import eitherRouter from './either';
+
 const router = express.Router();
 
 router.use('/users', userRouter);

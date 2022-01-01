@@ -1,5 +1,6 @@
 import * as express from 'express';
 import eitherCtrl from '../controllers/either.controller';
+
 const router = express.Router();
 
 router.get('/', eitherCtrl.getEither);
