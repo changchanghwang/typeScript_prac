@@ -3,7 +3,7 @@ import Routers from '../interfaces/router.interface';
 import userController from '../controllers/user.controller';
 
 class userRouter implements Routers {
-  public path = '/user';
+  public path = '/users';
   public router = Router();
 
   constructor() {
@@ -11,13 +11,8 @@ class userRouter implements Routers {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}`, userController.signUp);
-    this.router.get(
-      `${this.path}`,
-      (req: Request, res: Response, next: NextFunction) => {
-        res.json({ hi: 'hi' });
-      }
-    );
+    this.router.post(`${this.path}/signup`, userController.signUp);
+    this.router.post(`${this.path}/signin`, userController.signIn);
   }
 }
 

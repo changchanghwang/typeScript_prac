@@ -6,7 +6,8 @@ import * as morgan from 'morgan';
 import * as helmet from 'helmet';
 import * as compression from 'compression';
 import userRouter from './routers/user';
-
+import * as passport from 'passport';
+import { localSignIn } from './passport/localStrategy';
 class Server {
   public app: express.Application;
 
@@ -14,6 +15,7 @@ class Server {
     this.app = express();
     this.connectDatabase();
     this.middleware();
+    this.passportAuth();
     this.initializeRouter(routers);
   }
 
@@ -33,6 +35,11 @@ class Server {
     this.app.use(compression());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(express.json());
+  }
+
+  private passportAuth() {
+    this.app.use(passport.initialize());
+    localSignIn();
   }
 
   private connectDatabase() {
