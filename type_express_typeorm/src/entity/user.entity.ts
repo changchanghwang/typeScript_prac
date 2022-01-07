@@ -16,10 +16,21 @@ export class User extends BaseEntity {
   @Column({
     nullable: false,
   })
+  email: string;
+
+  @Column({
+    nullable: false,
+  })
   name: string;
 
   @Column({
     nullable: false,
   })
   password: string;
+
+  static findOneByEmail(email: string) {
+    return this.createQueryBuilder('users')
+      .where('users.email=:email', { email })
+      .getOne();
+  }
 }
