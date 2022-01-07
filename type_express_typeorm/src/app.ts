@@ -5,6 +5,7 @@ import dbConnect from './entity';
 import * as morgan from 'morgan';
 import * as helmet from 'helmet';
 import * as compression from 'compression';
+import userRouter from './routers/user';
 
 class Server {
   public app: express.Application;
@@ -39,4 +40,4 @@ class Server {
   }
 }
 
-export default new Server([new indexRouter()]);
+export default new Server([new indexRouter(), new userRouter()]);
