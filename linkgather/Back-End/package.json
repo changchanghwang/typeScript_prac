@@ -29,6 +29,7 @@
     "mysql2": "^2.3.3",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
+    "passport-kakao": "^1.0.1",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41"
@@ -44,6 +45,7 @@
     "@types/node": "^16.11.9",
     "@types/passport": "^1.0.7",
     "@types/passport-jwt": "^3.0.6",
+    "@types/passport-kakao": "^0.2.1",
     "@types/passport-local": "^1.0.34",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
