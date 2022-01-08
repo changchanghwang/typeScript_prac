@@ -1,13 +1,15 @@
 import * as express from 'express';
-import Routers from './interfaces/router.interface';
-import indexRouter from './routers';
 import dbConnect from './entity';
 import * as morgan from 'morgan';
 import * as helmet from 'helmet';
 import * as compression from 'compression';
-import userRouter from './routers/user';
 import * as passport from 'passport';
 import { localSignIn } from './passport/localStrategy';
+import Routers from './interfaces/router.interface';
+import indexRouter from './routers';
+import userRouter from './routers/user';
+import postRouter from './routers/post';
+import { errorHandler } from './middlewares/errorHandler';
 class Server {
   public app: express.Application;
 
@@ -17,6 +19,7 @@ class Server {
     this.middleware();
     this.passportAuth();
     this.initializeRouter(routers);
+    this.errorHandleMiddleware();
   }
 
   private initializeRouter(routers: Routers[]) {
@@ -42,9 +45,17 @@ class Server {
     localSignIn();
   }
 
+  private errorHandleMiddleware() {
+    this.app.use(errorHandler);
+  }
+
   private connectDatabase() {
     dbConnect.connection();
   }
 }
 
-export default new Server([new indexRouter(), new userRouter()]);
+export default new Server([
+  new indexRouter(),
+  new userRouter(),
+  new postRouter(),
+]);

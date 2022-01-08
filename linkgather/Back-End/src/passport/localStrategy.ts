@@ -37,12 +37,12 @@ export const localSignIn = () => {
   passport.use(
     new jwtStrategy(
       {
-        jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: passportJWT.ExtractJwt.fromHeader('authorization'),
         secretOrKey: process.env.SECRET,
       },
       async (jwtPayload, done) => {
         try {
-          const user = await User.findByIds(jwtPayload.id);
+          const user = await User.findOneById(jwtPayload.id);
           return done(null, user);
         } catch (err) {
           return done(err);
