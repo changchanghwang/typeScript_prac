@@ -13,6 +13,10 @@ class postRouter implements Routers {
 
   private initializeRoutes() {
     this.router.post(`${this.path}`, auth, postController.createPost);
+    this.router.patch(`${this.path}/:id`, auth, postController.editPost);
+    this.router.delete(`${this.path}/:id`, auth, postController.deletePost);
+    this.router.post(`${this.path}/:id/preview`, postController.previewImage);
+    this.router.post(`${this.path}/like`, postController.like);
   }
 }
 

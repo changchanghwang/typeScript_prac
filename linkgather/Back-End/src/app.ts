@@ -6,9 +6,9 @@ import * as compression from 'compression';
 import * as passport from 'passport';
 import { localSignIn } from './passport/localStrategy';
 import Routers from './interfaces/router.interface';
-import indexRouter from './routers';
-import userRouter from './routers/user';
-import postRouter from './routers/post';
+import indexRouter from './routes';
+import userRouter from './routes/user';
+import postRouter from './routes/post';
 import { errorHandler } from './middlewares/errorHandler';
 class Server {
   public app: express.Application;
